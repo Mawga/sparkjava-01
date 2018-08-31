@@ -10,7 +10,9 @@ import static spark.Spark.port;
 
 public class SparkDemo01 {
     public static void main(String[] args) {
-
+	String html = "<h1><a href='/hello'>Hello</a> World!</h1>\n" +
+		"<p>This web app is powered by \n" +
+		"<a href='https://github.com/mawga/sparkjava-01'>this github repo</a></p>\n";
         port(getHerokuAssignedPort());
 		
 		System.out.println("");
@@ -18,8 +20,8 @@ public class SparkDemo01 {
 		System.out.println("");						  
 		System.out.println("In browser, visit: http://localhost:" + getHerokuAssignedPort() + "/hello");
 		System.out.println("");
-		spark.Spark.get("/", (req, res) -> "<b>Hello World!</b>\n");
-
+		spark.Spark.get("/", (req, res) -> html);
+		spark.Spark.get("/hello", (req, res) -> "<p><b>Hello, World!</b> You just clicked the first link on my web app.</p>");
 	}
 	
     static int getHerokuAssignedPort() {
